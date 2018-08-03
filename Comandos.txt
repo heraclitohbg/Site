@@ -1,0 +1,134 @@
+******************************************* NODE JS *******************************************
+NodeJs:
+	npm init // Cria o arquivo "package.json" na raiz do projeto para gerenciar todas as dependências do seu projeto
+
+	npm install --save nome_do_pacote // Instala o pacote e o coloca na sessão "dependencies" de "package.json", da versão 5 em diante nao precisa especificar esta flag
+					  // Pergunta para saber quando usar: Preciso desse módulo em produção? A minha aplicação funciona sem ele? Se a resposta for "não" e "sim" é indicado usar esta flag
+
+	npm install --save-dev nome_do_pacote // Instala um pacote que só será utilizado em modo de desenvolvimento mas não em produção
+
+	npm install -g nome_do_pacote@versao // "-g" indica que a instalação será global, se não usá-la o pacote sera instalado só no projeto. Caso não informe a versão, será instalada a mais nova disponivel
+
+	npm install // Instala todos os pacotes descitos no "package.json" 
+
+	npm install --production // Instala todos os pacotes descitos no "package.json" e ignorar os devDependencies
+
+	npm uninstall nome_do_pacote@versao // Desinstalar um pacote, use a flag "-g" para desinstalar um pacote global
+
+	npm list // Listar os pacotes instalados
+
+	npm list -g // Listar todos os pacotes instalados
+
+	node --version // saber a versão do Node
+
+
+Instalar o SASS:
+	npm install -g sass // Instalar o SASS de forma global
+	sass --version // Saber a versão do SASS
+
+
+Instalar o Gulp: // Executa tarefas Javascript
+	npm install -g gulp-cli // Instalar o gulp-cli de forma global (Não instalar com a flag --save-dev)
+	npm install --save-dev gulp // Instalar o gulp como dependencia de desenvolvimento 
+	npm install --save-dev gulp-sass // Instalar o gulp-sass como dependencia de desenvolvimento (monitora em tempo real as alterações do .sass para gerar o .css) 
+	gulp --version // Saber a versão do Gulp
+
+
+Instalar o Bootstrap:
+	npm install bootstrap
+
+
+Instalar o JQuery:
+	npm install jquery
+
+
+Instalar o Popper.js:
+	npm install popper.js
+
+
+Instalar o font-awesome: // Biblioteca de imagens
+	npm install @fortawesome/fontawesome-free // Usar o arquivo all.js para funcionar
+
+
+******************************************* GIT E GITHUB *******************************************
+http://wiki.nosdigitais.teia.org.br/Git_-_principais_comandos
+
+git config --global user.name "nome_do_usuario" // Configura o nome do usuário no git. Manter " no comando
+git config --global user.email "email" // Configura o e-mail do usuário no git. Manter " no comando
+git config --global core.editor notepad++ // Configura o editor padrão do git, neste caso o notepad++
+git config --global --list // Lista as configurações globais
+git config --list // Lista toda a configuração
+
+git init // Cria um repositório git da pasta atual (.git)
+readme.md // Esse arquivo cria a parte inferior dos projetos do github onde tem uma breve explicação do que é, como usar entre outras coisas (.md é uma liguagem de marcação Markdown)
+
+Status do ciclo de vida dos arquivos:
+	untracked - arquivo não versionado pelo git
+	unmodified - arquivo que não sofreu modificação
+	modified - arquivo modificado
+	staged - arquivo pronto para ser gerado a versão (commit)
+
+git status // Mostra o status atual do repositorio
+git add Nome_do_arquivo // Adicionar o arquivo para o próximo commit ("git reset" para desfazer)
+git commit -m "Mensagem" // Cria uma versão com uma mensagem de descrição do que foi feito neste commit (flag -m)
+git commit -am "Mensagem" // Cria uma versão de todos os arquivos modificados + uma mensagem
+git log // Lista todos os logs com varias informações
+git log --author="nome_do_autor" // Lista todos os commits deste autor
+git shortlog // Lista em ordem alfabética os autores, quantos commits fizeram e a descrição
+git shortlog -sn // Lista em ordem alfabética somente os autores e quantos commits fizeram
+git log --graph // Lista os logs em forma de gráfico (branches e versões)
+git show id_commit // Lista as mudanças realizadas pelo commit (id_commit = hash)
+git diff // Ver as mudanças que o commit causará
+git diff --name-only // Lista o nome dos arquivos modificados
+git checkout nome_do_arquivo // Volta com o arquivo do ultimo commit
+git rm --cached nome_do_arquivo // Retira o arquivo do monitoramento do git
+git rm --chached -r nome_do_diretorio // Retira o diretorio do monitoramento do git
+
+git reset [--soft|--mixed|--hard] id_commit_anterior
+	--soft  // Cancela o último commit mas deixa o arquivo no status "staged" pronto para ser commitado novamente, ou seja, ele não altera o arquivo, somente o commit.
+	--mixed // Cancela o último commit mas deixa o arquivo no status "modified"
+	--hard  // Cancela tudo do último commit e as alterações feitas no arquivo. (Ex: git reset --hard HEAD~1 "volta o commit anterior")
+Obs: o git reset altera o histórico do commit, ou seja, ele desfaz todos os commits a frente do selecionado informado a diante.
+
+git revert id_commit // Desfazer um commit que não é o commit mais recente e sim um mais antigo. Pode haver conflitos nessa operação, 
+                        pois ao reverter um commit que criou uma linha, pode causar conflito com outro commit que editou aquela linha. Neste caso o git dará um aviso e você terá que resolver os conflitos.
+
+Chave SSH:
+	ssh-keygen -t rsa -b 4096 -C "seu_email_do_github@example.com" // Cria uma chave ssh para que o git comunique com o repositório remoto do github. execute no Git Bash
+								       // Vá onde o arquivo foi gerado e copie o conteúdo do arquivo id_rsa.pub e adicione no github em SSH keys
+
+git remote add origin git@github.com:nome_do_usuario/nome_do_repositorio.git // Vincular repositório local com um repositório remoto 
+
+git remote set-url origin git@github.com:nome_do_usuario/novo_repositorio.git // Altear a url do git remote
+
+git remote // Exibir os repositórios remotos
+
+git remote show origin // Exibir informações dos repositórios remotos
+
+git remote rename origin novo_nome // Renomear um repositório remoto
+
+git remote rm nome_do_repositorio // Desvincular um repositório remoto 
+
+git push -u origin master // Enviar arquivos/diretórios para o repositório remoto. O primeiro push de um repositório deve conter o nome do repositório remoto e o branch (flag "-u" é para trackear assim os demais pushes não precisam dessa informação (git push))
+
+git pull  // Atualizar repositório local de acordo com o repositório remoto. Atualizar os arquivos no branch atual
+git fecth // Buscar as alterações, mas não aplica-las no branch atual
+
+git clone git@github.com:nome_do_usuario/nome_do_repositorio.git [novo_nome] // Clonar um repositório remoto já existente
+
+git checkout -b nome_do_branch // Criar um novo branch
+
+git branch // Lista os branchs existentes, o * indica o atual
+
+git checkout nome_do_branch // Seleciona o branch
+
+git branch -D nome_do_branch // Apaga o branch
+
+
+https://gist.github.com/leocomelli/2545add34e4fec21ec16
+******************************************* VIDEOS *******************************************
+https://www.youtube.com/watch?v=u65n-osqti8
+https://www.youtube.com/watch?v=MkowUkgxGAo
+https://www.youtube.com/watch?v=_0PL45xM__0&list=PLBbHLUbqqCrTwIrdix6kl84m4OPE0JexR
+
+http://rogerdudler.github.io/git-guide/index.pt_BR.html
